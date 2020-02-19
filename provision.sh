@@ -10,7 +10,7 @@ sudo apt-get upgrade -y
 sudo apt-get install software-properties-common -y
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install nodejs -y
-sudo apt install npm
+sudo apt install npm -y
 
 # install pm2
 sudo npm install pm2 -g
@@ -31,7 +31,7 @@ sudo npm install pm2 -g
 
 # remove the old apache file and add new one
 sudo rm /etc/apache2/sites-available/000-default.conf
-sudo cp /home/ubuntu/environment/000-default.conf /etc/apache2/sites-available/000-default.conf
+sudo cp /home/ubuntu/environment/app/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # make needed changes and then restart apache
 sudo a2enmod proxy

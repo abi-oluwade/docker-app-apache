@@ -4,14 +4,14 @@ FROM ubuntu:18.04
 # Update Software repository
 RUN apt-get update
 
-COPY . /app
+COPY app /home/ubuntu/app
 
-COPY . /environment
+COPY environment /home/ubuntu/environment
 
 RUN apt-get install sudo
 
-# Configure Services and Port
+# Run provision script
 COPY provision.sh /provision.sh
-CMD ["./provision.sh"]
+RUN ./provision.sh
 
 EXPOSE 80 443 3000
