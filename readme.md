@@ -1,4 +1,4 @@
-# Docker instructions for app and apache2
+# Docker instructions for app and apache2 and Jenkins
 
 
 ````
@@ -36,7 +36,7 @@ Using Jenkins master and slave nodes I will try to test the repo using webhooks
 and then proceed to deploy the image to that it can be accessed publicly.
 
 ````
-docker run -it -p 80:3000 -v /var/run/docker.sock:/var/run/docker.sock abioluwade/app-apache-1
+sudo docker run -it -p 80:3000 -v /var/run/docker.sock:/var/run/docker.sock abioluwade/app-apache-1
 ````
 - This command will run the image with port 80 on the machine mapped to port 3000 within the container which
 the app is running on. (-d can run it in detached mode and allow the user to perform other tasks on the computer while
@@ -55,6 +55,20 @@ sudo chmod 777 /var/run/docker.sock
 
 to change the permissions so docker daemon can be accessed via Jenkins
 
+- Exit after changing these permissions then ssh in again.
 
 So the CI pipeline will listen to the repo, and then test any changes by building from the Dockerfile in the repo
 if this successfully builds, the next step which is CD will start and deploy the image onto the production server.
+
+================================================================================
+
+This side project was to simulate a *dev* environment being able to run a docker image and play around with it within a container
+a *test* environment with docker installed and lets the Dockerfile be built there that was modified by the dev, and
+a production *env* which is where the CD jenkins job deploys the app to the public.
+
+================================================================================
+
+When creating the Jenkins ci pipeline, I have emailed to abi.oluwade@gmail.com the instructions to create a slave node, and also to sort out the git SCM you must add the deploy key and have the corresponding private key in your credentials on the Jenkins server.
+
+*Restrict where this project can run* in the GENERAL section on Jenkins config allows us to pick
+a node or slave for the job to be carried out on.
