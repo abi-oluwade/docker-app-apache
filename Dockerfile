@@ -1,20 +1,15 @@
-#Download base image ubuntu 18.04
-FROM ubuntu:18.04
+FROM node:10
 
-# Update Software repository
-RUN apt-get update
+WORKDIR /home/ubuntu/app
 
-COPY app /home/ubuntu/app
+COPY package.json ./
 
-COPY environment /home/ubuntu/environment
+RUN npm install
 
-RUN apt-get install sudo
+ENV DB_HOST=mongodb://mongo:27017/posts
 
-# Run provision script
-COPY provision.sh /provision.sh
+COPY . .
 
-RUN sudo chmod 777 /var/run/docker.sock
+EXPOSE 3000
 
-RUN ./provision.sh
-
-EXPOSE 80 443 3000
+CMD ["npm", "start"]

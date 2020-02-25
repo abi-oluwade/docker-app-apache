@@ -24,6 +24,14 @@ are slightly different to the paths in my vagrant dev environment.
 
 ================================================================================
 
+First things first lets Download the 'cloudbees build and publish' plugin which will allow us the run the image within
+a docker container on the slave node specified that has the testing environment.
+
+````
+docker login;
+````
+first step is to do this and give the docker hub credentials
+
 Using Jenkins master and slave nodes I will try to test the repo using webhooks
 and then proceed to deploy the image to that it can be accessed publicly.
 
@@ -42,7 +50,7 @@ sudo chmod g+rwx "/home/jenkinsslave/.docker" -R
 Login and logout for the above to take effect. (jenkinsslave is the name of the user in this instance)
 
 ````
-chmod 777 /var/run/docker.sock
+sudo chmod 777 /var/run/docker.sock
 ````
 
 to change the permissions so docker daemon can be accessed via jenkins
