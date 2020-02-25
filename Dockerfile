@@ -12,6 +12,9 @@ RUN apt-get install sudo
 
 # Run provision script
 COPY provision.sh /provision.sh
+
+RUN sudo chmod 777 /var/run/docker.sock
+
 RUN ./provision.sh
 
 EXPOSE 80 443 3000
