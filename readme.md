@@ -53,4 +53,8 @@ Login and logout for the above to take effect. (jenkinsslave is the name of the 
 sudo chmod 777 /var/run/docker.sock
 ````
 
-to change the permissions so docker daemon can be accessed via jenkins
+to change the permissions so docker daemon can be accessed via Jenkins
+
+
+So the CI pipeline will listen to the repo, and then test any changes by building from the Dockerfile in the repo
+if this successfully builds, the next step which is CD will start and deploy the image onto the production server.
