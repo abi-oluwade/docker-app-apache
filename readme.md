@@ -20,3 +20,29 @@ to push it to the repo later.
 
 NOTE: provision script must be modified slightly as the paths in a docker container
 are slightly different to the paths in my vagrant dev environment.
+
+
+================================================================================
+
+Using Jenkins master and slave nodes I will try to test the repo using webhooks
+and then proceed to deploy the image to that it can be accessed publicly.
+
+````
+docker run -it -p 80:3000 -v /var/run/docker.sock:/var/run/docker.sock abioluwade/app-apache-1
+````
+- This command will run the image with port 80 on the machine mapped to port 3000 within the container which
+the app is running on. (-d can run it in detached mode and allow the user to perform other tasks on the computer while
+  the container continues to run)
+
+````
+sudo chown jenkinsslave:jenkinsslave /home/jenkinsslave/.docker -R
+sudo chmod g+rwx "/home/jenkinsslave/.docker" -R
+
+````
+Login and logout for the above to take effect. (jenkinsslave is the name of the user in this instance)
+
+````
+chmod 777 /var/run/docker.sock
+````
+
+to change the permissions so docker daemon can be accessed via jenkins
